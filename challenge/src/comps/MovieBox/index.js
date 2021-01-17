@@ -1,5 +1,5 @@
 import React from 'react';
-import styled from 'styled-components';
+import styled, {css} from 'styled-components';
 
 const MovieCont = styled.div`
     min-width:320px;
@@ -44,6 +44,7 @@ const MovieButton = styled.button`
     background-color:#007F5F;
     color:white;
     font-family: "SF Pro Text";
+
 `;
 
 

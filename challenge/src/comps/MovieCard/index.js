@@ -1,5 +1,5 @@
 import React from 'react';
-import styled from 'styled-components';
+import styled, {css} from 'styled-components';
 
 const CardCont = styled.div`
     min-width:180px;
@@ -45,6 +45,10 @@ const CardButton = styled.button`
     background-color:#007F5F;
     color:white;
     font-family: "SF Pro Text";
+
+    ${props => props.active === true && css`
+        background-color:#CCCCCC;
+    `}
 `;
 
 const CardImg = styled.img`
@@ -63,7 +67,7 @@ const MovieCard = ({title, year, nominate, button, state, pic, bgimg }) =>{
             <CardTitle>{title}</CardTitle>
             <CardYear>{year}</CardYear>
         </CardContent>
-        <CardButton onClick={nominate} disabled={state}>{button}</CardButton>
+        <CardButton onClick={nominate} active={state} disabled={state}>{button}</CardButton>
     </CardCont>
 }
 

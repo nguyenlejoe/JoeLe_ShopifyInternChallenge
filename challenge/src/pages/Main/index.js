@@ -14,14 +14,12 @@ const Main = () => {
     const [movieInput, setMovieInput] = useState("");
     const [Nominate, setNominate] = useState([]);
     const [NominationState, setNominationState] = useState(true);
-    
     // Key - b9966b78
     const searchMovie = async(searchText) =>{
         var resp = await axios.get("http://www.omdbapi.com/?s=" + searchText + "&apikey=b9966b78");
         setMovie(...[resp.data.Search]);
         console.log(searchText)
         console.log(movies);
-
     } 
 
     const HandleRemove = (name) => {
@@ -43,19 +41,29 @@ const Main = () => {
             </div>
             <div className = "results">
                 <Results
+                searchInput={movieInput}
                 content={ movies && movies.map((o,i)=>{
+                    let active = false
+                    for(let item of Nominate){
+                        if(item.Title === o.Title){
+                            active = true;
+                        }
+                    }
                     return ( 
                         <MovieCard
                             bgimg={o.Poster}
                             title={o.Title}
                             year={o.Year}
                             pic={o.Poster}
+                            state={active}
                             nominate={()=>{
-                                setNominate([...Nominate, o])
-                                if(Nominate.length === 4){
-                                    setNominationState(false)
+                                if(Nominate.length <= 4){
+                                    setNominate([...Nominate, o])
+                                    if(Nominate.length === 4){
+                                        setNominationState(false)
+                                    }
                                 }
-                            }}
+                            }} 
                             button="Nominate"
                         />
                     );
