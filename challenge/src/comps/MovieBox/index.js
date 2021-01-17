@@ -49,12 +49,12 @@ const MovieButton = styled.button`
 
 
 
-const MovieBox = ({title, year, nominate, button, state, pic, bgimg }) =>{
+const MovieBox = ({title, year, nominate, button, bgimg }) =>{
     return <MovieCont bgimg={bgimg}>
         <MovieContent>
             <MovieTitle>{title}  ({year}) </MovieTitle>
         </MovieContent>
-        <MovieButton onClick={nominate} disabled={state}>{button}</MovieButton>
+        <MovieButton onClick={nominate} >{button}</MovieButton>
     </MovieCont>
 }
 
