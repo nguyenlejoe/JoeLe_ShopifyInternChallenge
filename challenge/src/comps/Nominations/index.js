@@ -3,10 +3,9 @@ import styled from 'styled-components';
 
 const NominationCont = styled.div`
     display:flex;
+    flex:1.5;
     flex-direction:column;
-    min-width:360px;
-    max-width:360px;
-    min-height:400px;
+    margin-left:2%;
     background: #FFFFFF;
     box-shadow: 0px 2px 1px rgba(0, 0, 0, 0.05), 0px 0px 1px rgba(0, 0, 0, 0.25);
     border-radius: 8px;

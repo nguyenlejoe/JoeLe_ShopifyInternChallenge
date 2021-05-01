@@ -1,7 +1,8 @@
 import React from 'react';
 import styled, {css} from 'styled-components';
+import {motion} from "framer-motion";
 
-const CardCont = styled.div`
+const CardCont = styled(motion.div)`
     min-width:180px;
     min-height:250px;
     max-width:200px;
@@ -10,7 +11,7 @@ const CardCont = styled.div`
     justify-content:space-between;
     align-items:center;
     flex-direction:column;
-    margin:10px;
+    margin:15px;
     background: #F0F0F0;
     box-shadow: 2px 4px 5px 2px rgba(0, 0, 0, 0.20);
     border-radius: 8px;
@@ -60,8 +61,36 @@ const CardImg = styled.img`
 `;
 
 const MovieCard = ({title, year, nominate, button, state, pic, bgimg }) =>{
+
+    const variants = {
+        hidden:{
+            opacity:0,
+            y: '10px'
+        },
+        visible:{
+            opacity:1,
+            y: '0',
+            duration:1,
+            transition: {
+                type:"spring",
+                stiffness:90,
+                mass:0.8,
+                damping:10
+            }
+        },
+    }
     
-    return <CardCont bgimg={bgimg}>
+    return <CardCont bgimg={bgimg}
+    variants={variants}
+    initial="hidden"
+    animate="visible"
+    whileHover={{
+        scale:1.1,
+        transition:{
+            duration:.2
+        }
+    }}
+    >
         <CardImg src={pic}></CardImg>
         <CardContent>
             <CardTitle>{title}</CardTitle>

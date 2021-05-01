@@ -3,11 +3,10 @@ import styled from 'styled-components';
 
 const ResultCont = styled.div`
     display:flex;
+    flex:2;
+    max-width:50%;
+    min-height:480px;
     flex-direction:column;
-    min-width:58%;
-    max-width:58%;
-    min-height:400px;
-    max-height:400px;
     background: #FFFFFF;
     box-shadow: 0px 2px 1px rgba(0, 0, 0, 0.05), 0px 0px 1px rgba(0, 0, 0, 0.25);
     border-radius: 8px;

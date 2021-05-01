@@ -1,13 +1,12 @@
 import React from 'react';
 import styled, {css} from 'styled-components';
+ 
 
 const BannerCont = styled.div`
-    width:62%;
+    width:100%;
     display:flex;
     justify-content:center;
     align-items:center;
-    bottom:135px;
-    position:relative;
     min-height:80px;
     max-height:80px;
     background-color:#007F5F;

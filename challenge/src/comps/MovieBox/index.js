@@ -1,11 +1,8 @@
 import React from 'react';
 import styled, {css} from 'styled-components';
+import {motion} from "framer-motion";
 
-const MovieCont = styled.div`
-    min-width:320px;
-    min-height:50px;
-    max-width:320px;
-    max-height:100px;
+const MovieCont = styled(motion.div)`
     display:flex;
     justify-content:space-between;
     align-items:center;
@@ -50,7 +47,36 @@ const MovieButton = styled.button`
 
 
 const MovieBox = ({title, year, nominate, button, bgimg }) =>{
-    return <MovieCont bgimg={bgimg}>
+    
+    const variants = {
+        hidden:{
+            opacity:0,
+            y: '-10px'
+        },
+        visible:{
+            opacity:1,
+            y: '0',
+            duration:1,
+            transition: {
+                type:"spring",
+                stiffness:90,
+                mass:0.8,
+                damping:10
+            }
+        },
+    }
+
+    return <MovieCont bgimg={bgimg}
+    variants={variants}
+    initial="hidden"
+    animate="visible"
+    whileHover={{
+        scale:1.1,
+        transition:{
+            duration:.2
+        }
+    }}
+    >
         <MovieContent>
             <MovieTitle>{title}  ({year}) </MovieTitle>
         </MovieContent>

@@ -4,11 +4,11 @@ import styled from 'styled-components';
 const SearchCont = styled.div`
     display:flex;
     flex-direction:column;
-    width:97.5%;
     background: #FFFFFF;
     box-shadow: 0px 2px 1px rgba(0, 0, 0, 0.05), 0px 0px 1px rgba(0, 0, 0, 0.25);
     border-radius: 8px;
     padding:25px;
+    margin-bottom:2%;
 `;
 
 const SearchLabel = styled.label`
