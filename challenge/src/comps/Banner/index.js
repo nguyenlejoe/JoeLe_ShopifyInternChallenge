@@ -16,9 +16,13 @@ const BannerCont = styled.div`
     font-weight:300;
     font-size:20px;
     color:white;
+    visibility: hidden;
+    opacity: 0;
+    transition: visibility 0s, opacity 0.5s linear;
 
-    ${props => props.active === true && css`
-    display:none
+    ${props => props.active === false && css`
+    visibility: visible;
+    opacity: 1;
     `}
 
 `;

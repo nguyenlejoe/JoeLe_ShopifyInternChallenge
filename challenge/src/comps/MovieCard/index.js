@@ -3,30 +3,35 @@ import styled, {css} from 'styled-components';
 import {motion} from "framer-motion";
 
 const CardCont = styled(motion.div)`
-    min-width:180px;
-    min-height:250px;
-    max-width:200px;
+    min-width:220px;
+    min-height:320px;
+    max-width:250px;
     max-height:250px;
     display:flex;
-    justify-content:space-between;
+    justify-content:flex-end;
     align-items:center;
     flex-direction:column;
     margin:15px;
-    background: #F0F0F0;
-    box-shadow: 2px 4px 5px 2px rgba(0, 0, 0, 0.20);
+    background-image:url(${props => props.bgimg ? props.bgimg : "null"});
+    // background: #F0F0F0;
+    background-position:center;
+    background-size:cover;
     border-radius: 8px;
     padding:15px;
+    box-shadow: inset 40px -200px 40px -70px rgb(0,0,0, 0.6);
+    color:white;
 
 `;
 
 const CardTitle = styled.label`
     font-family: "SF Pro Display";
     font-weight:bold;
-    margin:5px;
+    font-size:18px;
 `;
 
 const CardYear = styled.label`
     font-family: "SF Pro Text";
+    font-size:16px;
     margin:5px;
 `;
 
@@ -34,6 +39,7 @@ const CardContent = styled.div`
     display:flex;
     flex-direction:column;
     text-align:center;
+    margin:10px;
 `;
 
 const CardButton = styled.button`
@@ -80,7 +86,8 @@ const MovieCard = ({title, year, nominate, button, state, pic, bgimg }) =>{
         },
     }
     
-    return <CardCont bgimg={bgimg}
+    return <CardCont 
+    bgimg={pic}
     variants={variants}
     initial="hidden"
     animate="visible"
@@ -91,7 +98,8 @@ const MovieCard = ({title, year, nominate, button, state, pic, bgimg }) =>{
         }
     }}
     >
-        <CardImg src={pic}></CardImg>
+        {/* <CardImg src={pic}></CardImg> */}
+
         <CardContent>
             <CardTitle>{title}</CardTitle>
             <CardYear>{year}</CardYear>
