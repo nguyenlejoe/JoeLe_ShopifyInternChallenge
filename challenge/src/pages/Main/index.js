@@ -46,7 +46,10 @@ const Main = () => {
     }, [Nominate])
 
     return <div className = "main">
-        <h1>The Shoppies</h1>
+        <div className="header">
+            <img src="shopifyLogo.png"/>
+            <h1>The Shoppies</h1>
+        </div>
         <div className = "content">
             <div className = "search">
                 <SearchBar
