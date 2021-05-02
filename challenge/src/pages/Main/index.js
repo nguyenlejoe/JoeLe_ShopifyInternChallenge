@@ -35,9 +35,11 @@ const Main = () => {
     useEffect(()=>{
         const savedNominations = JSON.parse(localStorage.getItem('nominateSaves'))
 
-        if (savedNominations !== null) {
+        if (savedNominations !== null && savedNominations.length === 5) {
             setNominate([...savedNominations])
-          }
+            setNominationState(false)
+        }
+          
     }, [])
 
     // Save nominations when one a movie has been added to the nominations list
