@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import {IntlProvider, FormattedMessage, FormattedNumber} from 'react-intl'
 
 const ResultCont = styled.div`
     display:flex;
@@ -35,10 +36,39 @@ const ResultContent = styled.div`
 `;
 
 
-const Results = ({searchInput, content}) => {
+const Results = ({searchInput, content, language}) => {
+    let langaugeMessage;
+    switch (language) {
+        case "French":
+            langaugeMessage = {Message: "Résultats pour"}
+            break;
+        case "Mandarin Chinese":
+            langaugeMessage = {Message: "结果"}
+            break;
+        case "Hindi":
+            langaugeMessage = {Message: "का परिणाम"}
+            break;
+        case "Spanish":
+            langaugeMessage = {Message: "resultados para"}
+            break;
+        case "Russian":
+            langaugeMessage = {Message: "Результаты для"}
+            break;
+        default:
+            break;
+    }
     return (   
     <ResultCont>
-        <ResultLabel>Results for {searchInput}</ResultLabel>
+        <IntlProvider messages={langaugeMessage}  defaultLocale="en">
+                <ResultLabel>
+                <FormattedMessage
+                    id="Message"
+                    defaultMessage="Results for"
+                />
+                {searchInput}
+                </ResultLabel>
+        </IntlProvider>
+        
         <ResultContent>
             <ResultOutput>{content}</ResultOutput>
         </ResultContent>

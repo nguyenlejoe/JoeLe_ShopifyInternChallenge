@@ -6,6 +6,8 @@ import Nomination from 'comps/Nominations';
 import MovieCard from 'comps/MovieCard';
 import MovieBox from 'comps/MovieBox';
 import Banner from 'comps/Banner';
+import DropDown from 'comps/DropDown';
+
 
 
 const Main = () => {
@@ -15,6 +17,7 @@ const Main = () => {
     const [movieInput, setMovieInput] = useState("");
     const [Nominate, setNominate] = useState([]);
     const [NominationState, setNominationState] = useState(true);
+    const [language, setLanguage] = useState("English")
 
     // Key - b9966b78
 
@@ -48,6 +51,7 @@ const Main = () => {
     }, [Nominate])
 
     return <div className = "main">
+        <DropDown handleLanguage={(language)=>setLanguage(language)} language={language}/>
         <div className="header">
             <img src="shopifyLogo.png"/>
             <h1>The Shoppies</h1>
@@ -55,12 +59,14 @@ const Main = () => {
         <div className = "content">
             <div className = "search">
                 <SearchBar
+                    language={language}
                     searchMovie = {(e)=>{setMovieInput(e.target.value)}}
                     onClick={()=>{searchMovie(movieInput)}}
                 />
             </div>
             <div className = "results">
                 <Results
+                    language={language}
                     searchInput={movieInput}
                     content={ movies && movies.map((o,i)=>{
                         // Check if the movie has already been nominated 
@@ -72,6 +78,7 @@ const Main = () => {
                         }
                         return ( 
                             <MovieCard
+                                language={language}
                                 bgimg={o.Poster}
                                 title={o.Title}
                                 year={o.Year}
@@ -92,9 +99,11 @@ const Main = () => {
                     })}
                 />
                 <Nomination
+                    language={language}
                     content={Nominate.map((o,i)=>{
                         return (
                             <MovieBox
+                                language={language}
                                 title={o.Title}
                                 year={o.Year}
                                 nominate={()=>{
@@ -108,7 +117,7 @@ const Main = () => {
                 />
             </div>
             <div className="banner">
-                <Banner active={NominationState}></Banner>
+                <Banner language={language} active={NominationState}></Banner>
             </div>  
         </div>
       

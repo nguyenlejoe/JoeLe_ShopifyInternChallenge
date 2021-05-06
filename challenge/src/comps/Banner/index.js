@@ -1,5 +1,6 @@
 import React from 'react';
 import styled, {css} from 'styled-components';
+import {IntlProvider, FormattedMessage, FormattedNumber} from 'react-intl'
  
 
 const BannerCont = styled.div`
@@ -29,11 +30,37 @@ const BannerCont = styled.div`
 
 
 
-const Banner = ({active}) =>{
+const Banner = ({active, language}) =>{
+    let langaugeMessage;
+    
+    switch (language) {
+        case "French":
+            langaugeMessage = {Message: "Vous avez sélectionné 5 nominations"}
+            break;
+        case "Mandarin Chinese":
+            langaugeMessage = {Message: "您选择了5个提名"}
+            break;
+        case "Hindi":
+            langaugeMessage = {Message: "आपने 5 नामांकन चुने हैं"}
+            break;
+        case "Spanish":
+            langaugeMessage = {Message: "Has seleccionado 5 nominaciones"}
+            break;
+        case "Russian":
+            langaugeMessage = {Message: "Вы выбрали 5 номинаций"}
+            break;
+        default:
+            break;
+    }
     return (
-        <BannerCont active={active}>
-            You have selected 5 nominations
+        <IntlProvider messages={langaugeMessage}  defaultLocale="en">
+            <BannerCont active={active}>
+            <FormattedMessage
+                id="Message"
+                defaultMessage="You have selected 5 nominations"
+            />
         </BannerCont>
+        </IntlProvider>
     );
 }
 

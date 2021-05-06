@@ -1,5 +1,6 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import styled from 'styled-components';
+import {IntlProvider, FormattedMessage, FormattedNumber} from 'react-intl'
 
 const SearchCont = styled.div`
     display:flex;
@@ -42,10 +43,40 @@ const SearchBox = styled.div`
     display:flex;
 `;
 
-const SearchBar = ({searchMovie,  onClick}) => {
+const SearchBar = ({searchMovie,  onClick, language}) => {
+    let langaugeMessage;
+    
+    switch (language) {
+        case "French":
+            langaugeMessage = {Message: "Titre du film"}
+            break;
+        case "Mandarin Chinese":
+            langaugeMessage = {Message: "电影标题"}
+            break;
+        case "Hindi":
+            langaugeMessage = {Message: "चलचित्र शीर्षक"}
+            break;
+        case "Spanish":
+            langaugeMessage = {Message: "Título de la película"}
+            break;
+        case "Russian":
+            langaugeMessage = {Message: "Название фильма"}
+            break;
+        default:
+            break;
+    }
+    
 
     return <SearchCont>
-        <SearchLabel>Movie Title</SearchLabel>
+        <IntlProvider messages={langaugeMessage}  defaultLocale="en">
+            <SearchLabel>
+                <FormattedMessage
+                    id="Message"
+                    defaultMessage="Movie Title"
+                />
+            </SearchLabel>
+        </IntlProvider>
+        
         <SearchBox>
             <SearchButton onClick={onClick}></SearchButton>
             <SearchInput placeholder="Search" onChange={searchMovie}></SearchInput>

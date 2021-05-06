@@ -1,6 +1,7 @@
 import React from 'react';
 import styled, {css} from 'styled-components';
 import {motion} from "framer-motion";
+import {IntlProvider, FormattedMessage, FormattedNumber} from 'react-intl'
 
 const MovieCont = styled(motion.div)`
     display:flex;
@@ -32,8 +33,8 @@ const MovieContent = styled.div`
 `;
 
 const MovieButton = styled.button`
-    width: 88px;
     height: 38px;
+    padding:10px;
     border-radius: 5px;
     position:relative;
     right:0px;
@@ -41,12 +42,34 @@ const MovieButton = styled.button`
     background-color:#007F5F;
     color:white;
     font-family: "SF Pro Text";
+    margin-left:15px;
 
 `;
 
 
 
-const MovieBox = ({title, year, nominate, button, bgimg }) =>{
+const MovieBox = ({title, year, nominate, button, bgimg, language }) =>{
+    let langaugeMessage;
+    
+    switch (language) {
+        case "French":
+            langaugeMessage = {Message: "Supprimer"}
+            break;
+        case "Mandarin Chinese":
+            langaugeMessage = {Message: "去掉"}
+            break;
+        case "Hindi":
+            langaugeMessage = {Message: "हटाना"}
+            break;
+        case "Spanish":
+            langaugeMessage = {Message: "Eliminar"}
+            break;
+        case "Russian":
+            langaugeMessage = {Message: "Удалять"}
+            break;
+        default:
+            break;
+    }
     
     const variants = {
         hidden:{
@@ -80,7 +103,14 @@ const MovieBox = ({title, year, nominate, button, bgimg }) =>{
         <MovieContent>
             <MovieTitle>{title}  ({year}) </MovieTitle>
         </MovieContent>
-        <MovieButton onClick={nominate} >{button}</MovieButton>
+        <IntlProvider messages={langaugeMessage}  defaultLocale="en">
+            <MovieButton onClick={nominate}>
+                <FormattedMessage
+                    id="Message"
+                    defaultMessage="Remove"
+                />
+            </MovieButton>
+        </IntlProvider>
     </MovieCont>
 }
 

@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import {IntlProvider, FormattedMessage, FormattedNumber} from 'react-intl'
 
 const NominationCont = styled.div`
     display:flex;
@@ -30,10 +31,39 @@ const NominationContent = styled.div`
 `;
 
 
-const Nomination = ({content}) => {
+const Nomination = ({content, language}) => {
+    let langaugeMessage;
+    console.log(language)
+    
+    switch (language) {
+        case "French":
+            langaugeMessage = {Message: "Nominations"}
+            break;
+        case "Mandarin Chinese":
+            langaugeMessage = {Message: "提名作品"}
+            break;
+        case "Hindi":
+            langaugeMessage = {Message: "नामांकन"}
+            break;
+        case "Spanish":
+            langaugeMessage = {Message: "Nominaciones"}
+            break;
+        case "Russian":
+            langaugeMessage = {Message: "Номинации"}
+            break;
+        default:
+            break;
+    }
     return (
     <NominationCont>
-        <NominationLabel>Nominations</NominationLabel>
+        <IntlProvider messages={langaugeMessage}  defaultLocale="en">
+            <NominationLabel>
+                <FormattedMessage
+                    id="Message"
+                    defaultMessage="Nominations"
+                />
+            </NominationLabel>
+        </IntlProvider>
             <NominationContent>
                 <NominationOutput>{content}</NominationOutput>
             </NominationContent>

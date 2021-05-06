@@ -1,6 +1,7 @@
 import React from 'react';
 import styled, {css} from 'styled-components';
 import {motion} from "framer-motion";
+import {IntlProvider, FormattedMessage, FormattedNumber} from 'react-intl'
 
 const CardCont = styled(motion.div)`
     min-width:220px;
@@ -43,8 +44,8 @@ const CardContent = styled.div`
 `;
 
 const CardButton = styled.button`
-    width: 88px;
     height: 38px;
+    padding:10px;
     border-radius: 5px;
     position:relative;
     right:0px;
@@ -58,15 +59,29 @@ const CardButton = styled.button`
     `}
 `;
 
-const CardImg = styled.img`
-    width:120px;
-    height:120px;
-    background-size:cover;
-    border-radius:100px;
-    object-fit: cover;
-`;
 
-const MovieCard = ({title, year, nominate, button, state, pic, bgimg }) =>{
+const MovieCard = ({title, year, nominate, button, state, pic, bgimg, language }) =>{
+    let langaugeMessage;
+    
+    switch (language) {
+        case "French":
+            langaugeMessage = {Message: "Nommer"}
+            break;
+        case "Mandarin Chinese":
+            langaugeMessage = {Message: "提名"}
+            break;
+        case "Hindi":
+            langaugeMessage = {Message: "नामजद"}
+            break;
+        case "Spanish":
+            langaugeMessage = {Message: "ombrar"}
+            break;
+        case "Russian":
+            langaugeMessage = {Message: "назначить"}
+            break;
+        default:
+            break;
+    }
 
     const variants = {
         hidden:{
@@ -96,15 +111,21 @@ const MovieCard = ({title, year, nominate, button, state, pic, bgimg }) =>{
         transition:{
             duration:.2
         }
-    }}
-    >
-        {/* <CardImg src={pic}></CardImg> */}
+    }}>
 
         <CardContent>
             <CardTitle>{title}</CardTitle>
             <CardYear>{year}</CardYear>
         </CardContent>
-        <CardButton onClick={nominate} active={state} disabled={state}>{button}</CardButton>
+        <IntlProvider messages={langaugeMessage}  defaultLocale="en">
+            <CardButton onClick={nominate} active={state} disabled={state}>
+                <FormattedMessage
+                    id="Message"
+                    defaultMessage="Nominate"
+                />
+            </CardButton>
+        </IntlProvider>
+        
     </CardCont>
 }
 
