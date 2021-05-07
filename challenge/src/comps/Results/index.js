@@ -63,9 +63,9 @@ const Results = ({searchInput, content, language}) => {
                 <ResultLabel>
                 <FormattedMessage
                     id="Message"
-                    defaultMessage="Results for"
+                    defaultMessage="Results for "
                 />
-                {searchInput}
+                {` ` + searchInput}
                 </ResultLabel>
         </IntlProvider>
         
